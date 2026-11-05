@@ -1,0 +1,677 @@
+/* ------------------------------------------------------------------
+   styles.css
+   ------------------------------------------------------------------ */
+
+html, body {
+  height: 100%;
+}
+
+.navbar-brand {
+  font-weight: 600;
+  color: #035172 !important;
+}
+
+/* ---- navbar on narrow and mid-size screens -----------------------------
+   Bootstrap sets the title to never wrap. On a phone the title (about
+   330 px at this size) plus the 56 px menu button then can't fit in a
+   narrow screen, so the browser lays the whole page out wider than the
+   phone: the menu button ends up off the right edge and the page
+   scrolls sideways. On a mid-size screen (small laptop / tablet
+   landscape, 992-1250 px) the same rule makes the TABS give way instead:
+   the last tab and "Source Code" drop onto a second row.
+   Letting the title wrap fixes both: it takes whatever space is left. */
+.navbar-brand {
+  white-space: normal;
+  line-height: 1.25;
+  min-width: 0;
+}
+
+/* the menu button keeps its size and stays on screen */
+.navbar-toggle,
+.navbar-toggler {
+  flex: 0 0 auto;
+}
+
+/* small phones: a slightly smaller title so it sits on two short lines */
+@media (max-width: 575.98px) {
+  .navbar-brand {
+    font-size: 1.05rem;
+    margin-right: 8px;
+  }
+}
+
+/* The full bar (title, logos, tabs, Source Code) needs about 1,250 px.
+   Below 1,200 px the menu stays collapsed behind the menu button (see the
+   small script in app.R that sets the navbar to collapse below the "xl"
+   breakpoint, instead of Bootstrap's default of 992 px). Bootstrap only
+   lays out the collapsed header (title left, button right) up to 991 px,
+   so extend that layout to 1,199 px: */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .navbar-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .navbar-header .navbar-toggle {
+    order: 2;
+  }
+}
+
+/* From 1,200 px the full bar is on screen. If space is still a little
+   tight (1,200-1,250 px), squeeze the TITLE (which can wrap) rather than
+   pushing the tabs and logos onto a second row */
+@media (min-width: 1200px) {
+  .navbar-collapse {
+    flex-shrink: 0;
+  }
+  .navbar-nav {
+    flex-wrap: nowrap;
+  }
+}
+
+/* the navbar title is a link back to the About page — it keeps the
+   plain title's look, with an underline on hover as the cue that it's
+   clickable */
+.title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.title-link:hover {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.source-code-link {
+  color: #8a6200 !important;
+}
+
+/* ---- short description text under each chart card's title ------------
+   font-size/color increased for accessibility (508 compliance review):
+   the original #6c757d at 0.72rem was borderline on contrast (4.69:1,
+   barely above the 4.5:1 AA minimum) combined with genuinely tiny text
+   — darker color (8.18:1) and a bigger size address both at once. */
+.chart-desc {
+  font-size: 0.85rem;
+  color: #495057;
+  padding: 0.4rem 1rem 0;
+  line-height: 1.35;
+}
+
+/* "Last updated: ..." line beneath each Data View / Map View subtab
+   description — its own block with a little space above it, so it
+   isn't sitting directly under the preceding paragraph (adjust
+   margin-top to taste) */
+.last-updated {
+  display: block;
+  margin-top: 0.45rem;
+}
+
+.card-scroll {
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+/* ---- bottom row of each filter box: the "Include projects with no date"
+   checkbox at the left, the "Reset selection(s)" button at the right,
+   vertically centered on each other. The button is grayed out and
+   unclickable while every filter in the box is at its starting value
+   (the server toggles the disabled state — see the RESET BUTTONS
+   section of server() in app.R). */
+.filter-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  /* cancels the card's usual gap between its children, so the checkbox
+     sits just under the year slider as it did when it was part of the
+     slider's own column */
+  margin-top: -1rem;
+}
+
+/* bootstrap-select shows its placeholder text (e.g. "All records" on the
+   Download Data tab when nothing is selected) in #999, which is only ~2.8:1
+   against the dropdown's background — below the 4.5:1 minimum for text.
+   Same dark gray as the chart descriptions instead (8:1). */
+.map-filter-card .bootstrap-select > .dropdown-toggle.bs-placeholder,
+.map-filter-card .bootstrap-select > .dropdown-toggle.bs-placeholder:hover,
+.map-filter-card .bootstrap-select > .dropdown-toggle.bs-placeholder:focus,
+.map-filter-card .bootstrap-select > .dropdown-toggle.bs-placeholder:active {
+  color: #495057;
+}
+
+/* the Apply + Reset buttons on the Download Data tab sit side by side */
+.filter-footer-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* "The download includes ... records" line between the table and the button */
+.dl-note {
+  font-size: 0.85rem;
+  color: #495057;
+  margin: 0.4rem 0 0.5rem;
+}
+
+/* Shiny gives input containers a fixed 300px width and a bottom margin;
+   neither is wanted inside this row */
+.filter-footer-row .shiny-input-container {
+  width: auto;
+  margin-bottom: 0;
+}
+
+.filter-reset-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---- banner used on the About and Contribute pages -------------------
+   Uses the real banner.png from www/. If you swap in a different image
+   later, just replace banner.png (or update the filename below) —
+   background-position may need adjusting if the new photo's aspect
+   ratio/focal point differs. */
+.fer-banner {
+  background-image: url('banner3.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  border-radius: 12px;
+  padding: 2rem 1.5rem 1rem 1.5rem;
+  text-align: center;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.fer-banner h1 {
+  color: white;
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(0,0,0,0.85), 0 0 4px rgba(0,0,0,0.9);
+}
+
+.fer-banner .subtitle {
+  margin-top: 0.3rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(0,0,0,0.55);
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  border-radius: 8px;
+}
+
+/* ---- feature card grid used on the About > Using the Dashboard page --*/
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.feature-card {
+  background: #f8fafb;
+  border: 1px solid #e2e8ee;
+  border-top: 4px solid #4c8bf5;
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.feature-card h4 {
+  margin: 0.4rem 0 0.5rem 0;
+  color: #14304d;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.feature-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.4;
+}
+
+.feature-icon {
+  line-height: 1;
+  color: #4c8bf5; /* bsicons SVGs inherit currentColor by default */
+}
+
+.feature-icon svg {
+  display: block;
+}
+
+/* distinct accent color per card — tints both the top border and the
+   icon; swap these to your brand palette whenever convenient */
+.feature-data       { border-top-color: #004F7E; }
+.feature-data       .feature-icon { color: #004F7E; }
+
+.feature-map        { border-top-color: #02806E; }
+.feature-map        .feature-icon { color: #02806E; }
+
+.feature-download   { border-top-color: #777777; }
+.feature-download   .feature-icon { color: #777777; }
+
+.feature-contribute { border-top-color: #8a6200; }
+.feature-contribute .feature-icon { color: #8a6200; }
+
+/* "Open" button on each feature card — solid fill matching its accent */
+.feature-open-btn {
+  margin-top: 0.9rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  padding: 0.25rem 0.9rem;
+  border: none !important;
+  color: #fff !important;
+}
+
+.feature-open-btn:hover {
+  filter: brightness(1.15);
+  color: #fff !important;
+}
+
+.feature-data       .feature-open-btn { background-color: #004F7E !important; }
+.feature-map        .feature-open-btn { background-color: #02806E !important; }
+.feature-download   .feature-open-btn { background-color: #777777 !important; }
+.feature-contribute .feature-open-btn { background-color: #8a6200 !important; }
+
+
+/* ---- funding/affiliation logo row on Using the Dashboard --------------
+   .logo-row uses flex-wrap so it naturally reflows into 2+ rows as the
+   window narrows or as more logos get added — no fixed column count
+   needs to be set anywhere for that to work. */
+.logo-partners-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8ee;
+}
+
+.logo-section-title {
+  font-weight: 700;
+  color: #14304d;
+  font-size: 1rem;
+  margin-bottom: 0.9rem;
+}
+
+.logo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.partner-logo {
+  max-height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ---- two-column contact block on the Contact page ---------------------
+   Everything above this (intro text, the Contribute link paragraph)
+   stays normal single-column text — only the two named contact blocks
+   below get split into columns. Stacks to one column on narrow screens. */
+.contact-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.contact-col h4 {
+  margin: 0 0 0.5rem 0;
+  color: #1E806E;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.contact-col p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+  .contact-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- three-column citation block on the Citation and Sources page -----
+   Same pattern as .contact-columns above, just three columns instead of
+   two. The intro paragraph above it, and the whole Sources section
+   below it, stay normal single-column text. Stacks to one column on
+   narrow screens (two breakpoints, so it steps down through 2 columns
+   before going to 1, rather than jumping straight to 1 on medium screens). */
+.citation-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.citation-col h4 {
+  margin: 0 0 0.5rem 0;
+  color: #14304d;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.citation-col p {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* icon shown above each citation column's heading — same simple
+   pattern as .feature-icon, just reused here. SVGs inherit their
+   color from currentColor, so each column's accent color (set below)
+   tints its icon automatically. */
+.citation-icon {
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.citation-icon svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.citation-col-descriptor .citation-icon,
+.citation-col-database   .citation-icon,
+.citation-col-dashboard  .citation-icon {
+  color: #02806E;
+}
+
+/* extra breathing room above "Sources" — it was sitting right under
+   the citation columns above it with barely any gap */
+.sources-heading {
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 900px) {
+  .citation-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .citation-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ---- Map View: let the habitat/data-source dropdown popups escape ----
+   the filter card instead of being clipped and needing an internal
+   scrollbar. Scoped to just this card (not the chart-containing cards
+   elsewhere) since forcing overflow:visible broadly is what caused the
+   Plotly clipping bug earlier — this card only holds simple inputs,
+   so it's safe here. */
+.map-filter-card,
+.map-filter-card .card-body,
+.map-filter-card .html-fill-container {
+  overflow: visible !important;
+}
+
+.map-filter-card .dropdown-menu,
+.map-filter-card .bootstrap-select .dropdown-menu {
+  z-index: 3000 !important;
+}
+
+/* ---- Data View: let this tab's content grow to its full natural ------
+   height and scroll, instead of bslib's default behavior of squishing
+   every card/chart to fit within the viewport. Unlike an earlier
+   attempt, this does NOT touch overflow/height on cards themselves
+   (that broke Plotly's internal clipping and caused overlapping
+   charts) — it only stops flex-shrink so each chart keeps the pixel
+   height it was given, and lets the tab's own container scroll to
+   reveal whatever doesn't fit. */
+.scroll-tab {
+  overflow-y: auto !important;
+}
+
+.scroll-tab .card,
+.scroll-tab .html-fill-item,
+.scroll-tab .bslib-gap-spacing,
+.scroll-tab .bslib-grid {
+  flex-shrink: 0 !important;
+}
+
+/* ---- shields.io-style badges used on the Citation and Sources page --- */
+.fer-badge {
+  display: inline-flex;
+  vertical-align: middle;
+  font-size: 0.75rem;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.fer-badge-label {
+  background-color: #555;
+  color: white;
+  padding: 2px 8px;
+}
+
+.fer-badge-value {
+  background-color: #4c8bf5;
+  color: white;
+  padding: 2px 8px;
+}
+
+/* ---- sources table on the Citation and Sources page --------------------
+   table-layout: fixed + colgroup widths pin the Code/Website columns to
+   a comfortable single-line width; Description has no width set, so it
+   automatically absorbs all remaining space and wraps as needed. */
+.fer-sources-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.fer-sources-table .col-code  { width: 170px; }
+.fer-sources-table .col-site  { width: 110px; }
+/* .col-desc intentionally has no width — it takes whatever's left */
+
+.fer-sources-table th,
+.fer-sources-table td {
+  border: 1px solid #e2e8ee;
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+  font-size: 0.9rem;
+}
+
+.fer-sources-table th {
+  background-color: #f4f7f9;
+  font-weight: 700;
+  color: #14304d;
+}
+
+.fer-sources-table td:first-child,
+.fer-sources-table td:last-child {
+  white-space: nowrap;
+}
+
+/* ---- the embedded Google Forms on the Contribute tab -------------------
+   The frame fills the full width of its space (on the Submit and Correct
+   pages that is the form's column; see below), on every screen size
+   (phone to widescreen). Note: Google lays the form itself out as a
+   column of up to 640 px, centered inside the frame, so on a wide screen
+   the form's own background (its "theme" in Google Forms) fills the space
+   either side of that column. To cap the width instead, add
+   e.g. max-width: 900px; to the rule below. */
+.fer-form-embed {
+  width: 100%;          /* explicit: an auto-margin box would otherwise shrink to fit its contents */
+  margin: 0 auto 1.5rem;
+}
+.fer-form-embed iframe {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  /* Google's height for the form, plus a little spare so a few extra
+     questions don't cause a second scrollbar inside the form. The three
+     values come from google_form_embed() (see global.R). */
+  height: calc(var(--form-h) * var(--form-spare));
+}
+@media (max-width: 767.98px) {
+  /* narrow screens: the form wraps onto more lines, so it needs more room */
+  .fer-form-embed iframe {
+    height: calc(var(--form-h) * var(--form-spare-phone));
+  }
+}
+.fer-form-fallback {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  color: #495057;
+}
+
+/* ---- Submit / Correct pages: text beside the form on wide screens --------
+   Under 1,200 px wide (phones, tablets, small windows) the page is a single
+   column: the text, then the form, as before. From 1,200 px up it becomes two
+   columns: the text on the left at a comfortable reading width (about 70
+   characters per line instead of 160-230), the form on the right. The
+   form frame fills its column, so there are no empty bands beside it. */
+@media (min-width: 1200px) {
+  .fer-contrib-cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 700px);
+    gap: 3rem;
+    align-items: start;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+}
+
+/* Where the window is tall enough, keep the instructions in view while the
+   (very long) Submit form scrolls past. The instructions are about 410 px
+   tall on wide screens but up to ~580 px at 1,200-1,300 px wide (the column is
+   narrower, so the text wraps more), and the scrolling panel is 80% of the
+   window height. So a narrower screen needs a taller window (820 px) than a
+   wide one (700 px) for the instructions to always fit inside the panel
+   without being cut off. If you make the text on these pages much longer,
+   these two heights may need raising.
+   Bootstrap's card-body is marked overflow:auto. It never scrolls here, but
+   it would still count as the "scroll container" that sticky attaches to,
+   instead of the panel that really scrolls, so that is switched off for these
+   two pages. */
+@media (min-width: 1200px) and (min-height: 820px), (min-width: 1300px) and (min-height: 700px) {
+  .fer-contrib-pane > .card-body {
+    overflow: visible;
+  }
+  .fer-contrib-text {
+    position: sticky;
+    top: 0.75rem;
+  }
+}
+
+/* ---- Restoration Techniques: hotspot table's angled headers -----------
+   reactable's own header cell containers clip anything taller than a
+   normal single line of text, which cuts off our rotated header divs
+   regardless of their own styling. Confirmed via browser inspection
+   that .rt-th-inner (outer) and .rt-text-content (inner) are the two
+   actual containers doing the clipping — forcing both to overflow:
+   visible with real height fixes it at the source, rather than
+   guessing at class names. The 112px header height leaves room for
+   long names that wrap onto several lines before being rotated (see
+   angled_header() in funcs.R). Scoped to .hotspot-table so it doesn't
+   affect the Download Data table elsewhere. */
+.hotspot-table .rt-th {
+  overflow: visible !important;
+  height: 112px !important;
+}
+
+.hotspot-table .rt-th-inner {
+  overflow: visible !important;
+  height: 112px !important;
+  display: flex !important;
+  align-items: flex-end !important;
+}
+
+.hotspot-table .rt-text-content {
+  overflow: visible !important;
+}
+
+/* ---- "Include undated projects" checkbox label, kept compact so it -----
+   stays on one line next to the year range slider */
+label[for="include_no_year"] {
+  font-size: 0.82rem;
+}
+
+/* ---- Map View: "Color/Scale points by" dropdowns appearing beneath ----
+   the leaflet map's zoom controls. shiny's selectInput() renders via
+   selectize.js, whose dropdown list is a custom overlay (not a native
+   OS-level <select> menu) — without an explicit z-index it can end up
+   behind leaflet's own controls, which sit at a fairly high z-index. */
+.selectize-dropdown {
+  z-index: 3000 !important;
+}
+
+/* ---- Map View: Regions/Counties legends sit above Leaflet's attribution -
+   The legends live in the bottom-LEFT corner, but the attribution text
+   (bottom-right) is long enough to span the whole width of these half-
+   width maps, so it was covering the bottom of the legend. This lifts
+   the legend clear of it. The attribution wraps to 2 lines (~33px) on
+   wider maps and 3 lines (~50px) on narrower ones, hence the two sizes
+   — adjust margin-bottom here if the attribution text ever changes. */
+.leaflet-bottom .polygon-legend {
+  margin-bottom: 44px;
+}
+
+@media (max-width: 1250px) {
+  .leaflet-bottom .polygon-legend {
+    margin-bottom: 60px;
+  }
+}
+
+/* ---- Map View: size legend appeared as two stacked boxes ---------------
+   leaflet::addControl() wraps whatever HTML it's given in Leaflet's own
+   default .leaflet-control styling (background, padding, shadow) — our
+   size_legend_fun()/category_size_legend_fun() HTML already supplies
+   its own complete background/padding/shadow, so without this override
+   the two nest on top of each other. Leaflet's own addLegend() doesn't
+   have this problem since it uses a different internal class. */
+.size-legend-control {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* ---- subtab description "i" info tooltip -------------------------------
+   Pure CSS hover reveal (no JS/Bootstrap-popover initialization needed)
+   — used to tuck a subtab's "Note: ..." caveat behind a small icon
+   instead of always showing the full text inline. */
+.info-tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.info-tooltip-icon {
+  color: #6c757d;
+}
+
+.info-tooltip-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 2000;
+  width: 320px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.6rem 0.8rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-size: 0.8rem;
+  font-style: italic;
+  color: #444;
+  line-height: 1.4;
+}
+
+.info-tooltip-wrapper:hover .info-tooltip-content {
+  display: block;
+}

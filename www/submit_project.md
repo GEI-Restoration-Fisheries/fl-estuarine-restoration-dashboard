@@ -1,0 +1,5 @@
+## Submit a Project
+
+Know of a missing estuarine restoration project that should be included in our database? Complete the form below to tell us about the project. We require vetting of all proposed corrections and updates, so a member of our team will contact you to discuss these changes further. Before submitting a project addition, please review the full database to ensure the project is not already represented in some capacity.
+
+**Note:** This form should not replace any standard reporting of restoration projects across different agencies and organizations. If you typically report habitat restoration projects through some other system from which the Florida Estuarine Restoration Database compiles project records — such as the annual National Estuary Program Online Reporting Tool (NEPORT) — continue your standard reporting efforts and it will be included in future data pulls from those sources. To see which data sources we use to compile the database, go to <a href="#" onclick="Shiny.setInputValue('goto_citation', Math.random()); return false;">Citation and Sources</a>.
