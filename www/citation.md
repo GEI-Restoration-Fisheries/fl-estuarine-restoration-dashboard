@@ -15,8 +15,8 @@ The Florida Estuarine Restoration Database is a free, open-access database for a
 <div class="citation-col citation-col-database">
 <div class="citation-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z"/></svg></div>
 <h4>To cite the current version of the database</h4>
-<p>Tampa Bay Estuary Program. (2026). <em>Florida Estuarine Restoration Database</em> (v1.0.0) [Data set]. Zenodo. DOI URL.</p>
-<span class="fer-badge"><span class="fer-badge-label">DOI</span><span class="fer-badge-value">10.5281/zenodo.XXXXXXX</span></span>
+<p>Tampa Bay Estuary Program. (2026). <em>Florida Estuarine Restoration Database</em> (v1.0.0) [Data set]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23930442" target="_blank">https://doi.org/10.5281/zenodo.23930442</a>.</p>
+<a href="https://doi.org/10.5281/zenodo.23930442"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23930442.svg" alt="DOI"></a>
 </div>
 
 <div class="citation-col citation-col-dashboard">
@@ -58,4 +58,4 @@ The table below lists the original data sources used to compile the Florida Estu
 
 <br>
 
-<span class="fer-badge"><span class="fer-badge-label">CC</span><span class="fer-badge-value">BY 4.0</span></span> This website is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+<img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"> This website is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)
